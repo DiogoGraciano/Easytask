@@ -52,7 +52,6 @@ class header extends layout{
 
         foreach ($menus as $menu)
         {
-
             $path = explode("/",url::getUriPath());
 
             $controler = explode("/",$menu["controller"]);
@@ -66,10 +65,13 @@ class header extends layout{
             $user = login::getLogged();
 
             if($user && in_array($user->tipo_usuario,json_decode($menu["tipo_usuario"]))){
-                if($menu["controller"])
+                if($menu["controller"]){
+                    $this->tpl->ulink = $menu["controller"];
                     $this->addLink(url::getUrlBase().$menu["controller"],$menu["nome"],$ativo,$menu["target_blank"],$menu["class_icone"]);
-                elseif($menu["link"])
+                }elseif($menu["link"]){
+                    $this->tpl->ulink = "";
                     $this->addLink($menu["link"],$menu["nome"],false,$menu["target_blank"]);
+                }
             }
         }
 

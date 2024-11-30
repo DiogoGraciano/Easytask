@@ -261,6 +261,7 @@ function setEvents() {
             if(a.classList != undefined){
                 a.addEventListener("click", function () { 
                     removeActiveMenu()  
+                    history.pushState(null, null,a.attributes["url-link"].value);
                     a.classList.add("active");
                 })
             } 
