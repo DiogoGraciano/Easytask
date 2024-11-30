@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4":{
+            "app\\":"app",
+            "core\\":"core"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.9",
+        "diogodg/neoorm": "^1.0",
+        "stripe/stripe-php": "^16.3"
+    }
+}

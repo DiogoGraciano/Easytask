@@ -1,0 +1,41 @@
+<main class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light"><a href="\"><img class="w-100" src="{logo}" alt="logo"></a></div>
+        <div class="link-group-main-menu list-group list-group-flush">
+            <!-- BEGIN BLOCK_LINK_NAV -->
+            <a class="link-main-menu list-group-item list-group-item-action list-group-item-light p-3 {ativo}" hx-get="{link}" hx-target="#page-content.container-fluid" hx-swap="innerHTML" {extra}>{icon}{titulo}</a>
+            <!-- END BLOCK_LINK_NAV -->
+        </div>
+    </div>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="sidebarToggle"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></button>
+                <ul class="navbar-nav mt-2 mt-lg-0 d-flex flex-row">
+                    <li class="nav-item mt-2 me-2">
+                        <span class="text-center">{data}</span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-gear"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <!-- <a class="dropdown-item" href="\cadastro">
+                                <i class="fa-solid fa-user-gear me-2 icon"></i>
+                                Cadastro</a>
+                            <a class="dropdown-item" href="\instrucoes">
+                                <i class="fa-solid fa-book-open me-2 icon"></i>
+                                Intruções de Uso</a> -->
+                            <a class="dropdown-item" href="\login\deslogar">
+                                <i class="fa-solid fa-right-from-bracket me-2 icon"></i>
+                                Sair</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container-fluid" id="page-content">
+            
+    

@@ -1,0 +1,118 @@
+<!-- BEGIN BLOCK_CALENDARIO -->
+<div class="agenda" id="agenda">
+    {modal}
+    <div class="px-2">
+        {filter}
+        <div id='calendar'></div>
+        <!-- BEGIN BLOCK_BUTTON -->
+        <div class="col-md-12 d-flex justify-content-center mt-2">
+            {button}
+        </div>
+        <!-- END BLOCK_BUTTON -->
+    </div>
+    <script src='{caminho}assets/js/calendar.min.js'></script>
+    <script src="{caminho}assets/js/calendarBootstrap5.min.js"></script>
+    <script src='{caminho}assets/js/locales-calendar.min.js'></script>
+    <script>
+        function loadCalendar(){
+
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                height: "auto",
+                expandRows: true,
+                timeZone: 'local',
+                initialDate: "{initial_date}",
+                slotMinTime: '{initial_time}',
+                slotMaxTime: '{final_time}',
+                slotDuration: '{slot_duration}',
+                locale: 'pt-br',
+                headerToolbar: {
+                left: 'prevYear,prev,next,nextYear today',
+                center: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay',
+                right: 'title'
+                },
+                initialView: 'timeGridDay',
+                longPressDelay: 500,
+                eventLongPressDelay: 500,
+                selectLongPressDelay: 500,
+                hiddenDays: {days_off},
+                selectable: true,
+                allDaySlot: true,
+                dayMaxEvents: true,
+                selectOverlap:false,
+                eventOverlap:false,
+                select: function(arg) {
+                    let modal = document.getElementById("{id_modal}");
+                    if(modal){
+
+                        arg.start.setMinutes(arg.start.getMinutes() - arg.start.getTimezoneOffset());
+                        arg.end.setMinutes(arg.end.getMinutes() - arg.end.getTimezoneOffset());
+
+                        htmx.ajax('GET',"{url_update_form}?start="+arg.start.toISOString().slice(0,16)+"&end="+arg.end.toISOString().slice(0,16),{target:'#{id_modal}-content', swap:'innerHTML'});
+
+                        modal = document.getElementById("{id_modal}");
+
+                        let myModal = new bootstrap.Modal(modal);
+                        
+                        myModal.show();
+                    }                   
+                },
+                eventClick: function(arg) {
+                    modal = document.getElementById("{id_modal}");
+                    if(modal){
+                        htmx.ajax('GET',"{url_update_form}"+arg.event.id,{target:'#{id_modal}-content', swap:'innerHTML'});
+                        let myModal = new bootstrap.Modal(modal);
+                        myModal.show();
+                    }                 
+                }, 
+                events: {events}
+            });
+        
+            calendar.render();
+
+            if (window.screen.width < 1000){
+                let element = document.querySelector('.fc-toolbar.fc-header-toolbar')
+                element.classList.add('row')
+                element.classList.add('col-lg-12')
+                document.querySelectorAll('.fc-toolbar-chunk').forEach(elements => {
+                    elements.classList.add('mt-2')
+                    elements.classList.add('mb-2')
+                })
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCalendar();
+
+            document.querySelector(".fc-button").addEventListener("click", function () {
+                if (window.screen.width < 1000){
+                    let element = document.querySelector('.fc-toolbar.fc-header-toolbar')
+                    element.classList.add('row')
+                    element.classList.add('col-lg-12')
+                    document.querySelectorAll('.fc-toolbar-chunk').forEach(elements => {
+                        elements.classList.add('mt-2')
+                        elements.classList.add('mb-2')
+                    })
+                }
+            });
+        });
+
+        document.body.addEventListener('htmx:afterSettle', function (evt) {
+            loadCalendar();
+
+            document.querySelector(".fc-button").addEventListener("click", function () {
+                if (window.screen.width < 1000){
+                    let element = document.querySelector('.fc-toolbar.fc-header-toolbar')
+                    element.classList.add('row')
+                    element.classList.add('col-lg-12')
+                    document.querySelectorAll('.fc-toolbar-chunk').forEach(elements => {
+                        elements.classList.add('mt-2')
+                        elements.classList.add('mb-2')
+                    })
+                }
+            });
+        });
+    </script>
+</div>
+<!-- END BLOCK_CALENDARIO -->

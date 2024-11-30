@@ -1,0 +1,45 @@
+2024-11-29T19:23:28+00:00 [ERROR] : app\controllers\main\task->index(Array()) Error: var id_form does not exist Trace: #0 C:\Projetos\easytask\app\view\layout\agenda.php(17): app\view\layout\template->__set('id_form', 'form-manutencao')
+#1 C:\Projetos\easytask\app\controllers\main\task.php(46): app\view\layout\agenda->addModal(Object(app\view\layout\modal), 'form-task', 'task/getFormTas...')
+#2 C:\Projetos\easytask\index.php(88): app\controllers\main\task->index(Array)
+#3 {main}
+2024-11-29T20:02:17+00:00 [ERROR] : app\controllers\main\task->index(Array()) Error: Tabela: category SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easytask.category' doesn't exist Trace: #0 C:\Projetos\easytask\vendor\diogodg\neoorm\src\db.php(294): diogodg\neoorm\db->selectInstruction('SELECT * FROM c...')
+#1 C:\Projetos\easytask\vendor\diogodg\neoorm\src\abstract\model.php(23): diogodg\neoorm\db->selectAll()
+#2 C:\Projetos\easytask\app\controllers\main\task.php(34): diogodg\neoorm\abstract\model->get(1, 'id_usuario', 0)
+#3 C:\Projetos\easytask\index.php(88): app\controllers\main\task->index(Array)
+#4 {main}
+2024-11-30T19:06:11+00:00 [ERROR] : app\controllers\main\task->updateModal(Array()) Error: Failed to parse time string (2024-11-30T00:30?end=2024-11-30T04:00) at position 16 (?): Unexpected character Trace: #0 C:\wamp64\www\easytask\app\helpers\functions.php(56): DateTimeImmutable->__construct('2024-11-30T00:3...')
+#1 C:\wamp64\www\easytask\app\controllers\main\task.php(82): app\helpers\functions::dateTimeBd('2024-11-30T00:3...')
+#2 C:\wamp64\www\easytask\app\controllers\main\task.php(99): app\controllers\main\task->getFormTask(Array, NULL, '2024-11-30T00:3...', NULL)
+#3 C:\wamp64\www\easytask\index.php(74): app\controllers\main\task->updateModal(Array)
+#4 {main}
+2024-11-30T19:06:12+00:00 [ERROR] : app\controllers\main\task->updateModal(Array()) Error: Failed to parse time string (2024-11-30T00:30?end=2024-11-30T04:00) at position 16 (?): Unexpected character Trace: #0 C:\wamp64\www\easytask\app\helpers\functions.php(56): DateTimeImmutable->__construct('2024-11-30T00:3...')
+#1 C:\wamp64\www\easytask\app\controllers\main\task.php(82): app\helpers\functions::dateTimeBd('2024-11-30T00:3...')
+#2 C:\wamp64\www\easytask\app\controllers\main\task.php(99): app\controllers\main\task->getFormTask(Array, NULL, '2024-11-30T00:3...', NULL)
+#3 C:\wamp64\www\easytask\index.php(74): app\controllers\main\task->updateModal(Array)
+#4 {main}
+2024-11-30T19:06:32+00:00 [ERROR] : app\controllers\main\task->updateModal(Array()) Error: Failed to parse time string (2024-11-30T00:30?end=2024-11-30T04:00) at position 16 (?): Unexpected character Trace: #0 C:\wamp64\www\easytask\app\helpers\functions.php(56): DateTimeImmutable->__construct('2024-11-30T00:3...')
+#1 C:\wamp64\www\easytask\app\controllers\main\task.php(82): app\helpers\functions::dateTimeBd('2024-11-30T00:3...')
+#2 C:\wamp64\www\easytask\app\controllers\main\task.php(99): app\controllers\main\task->getFormTask(Array, NULL, '2024-11-30T00:3...', NULL)
+#3 C:\wamp64\www\easytask\index.php(74): app\controllers\main\task->updateModal(Array)
+#4 {main}
+2024-11-30T19:07:01+00:00 [ERROR] : app\controllers\main\task->updateModal(Array()) Error: Failed to parse time string (2024-11-30T00:30?end=2024-11-30T04:00) at position 16 (?): Unexpected character Trace: #0 C:\wamp64\www\easytask\app\helpers\functions.php(56): DateTimeImmutable->__construct('2024-11-30T00:3...')
+#1 C:\wamp64\www\easytask\app\controllers\main\task.php(82): app\helpers\functions::dateTimeBd('2024-11-30T00:3...')
+#2 C:\wamp64\www\easytask\app\controllers\main\task.php(99): app\controllers\main\task->getFormTask(Array, NULL, '2024-11-30T00:3...', NULL)
+#3 C:\wamp64\www\easytask\index.php(74): app\controllers\main\task->updateModal(Array)
+#4 {main}
+2024-11-30T20:33:48+00:00 [ERROR] : app\controllers\main\category->index(Array()) Error: var url_update_consulta does not exist Trace: #0 C:\wamp64\www\easytask\app\view\layout\consulta.php(51): app\view\layout\template->__set('url_update_cons...', '')
+#1 C:\wamp64\www\easytask\app\controllers\main\category.php(39): app\view\layout\consulta->addMaintenceModal(Object(app\view\layout\modal))
+#2 C:\wamp64\www\easytask\index.php(74): app\controllers\main\category->index(Array)
+#3 {main}
+2024-11-30T20:33:49+00:00 [ERROR] : app\controllers\main\category->index(Array()) Error: var url_update_consulta does not exist Trace: #0 C:\wamp64\www\easytask\app\view\layout\consulta.php(51): app\view\layout\template->__set('url_update_cons...', '')
+#1 C:\wamp64\www\easytask\app\controllers\main\category.php(39): app\view\layout\consulta->addMaintenceModal(Object(app\view\layout\modal))
+#2 C:\wamp64\www\easytask\index.php(74): app\controllers\main\category->index(Array)
+#3 {main}
+2024-11-30T21:08:19+00:00 [ERROR] : app\controllers\main\category->action(Array(    [0] => 1)) Error: Tabela: category SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`easytask`.`task`, CONSTRAINT `task_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `category` (`id`)) Trace: #0 C:\wamp64\www\easytask\vendor\diogodg\neoorm\src\abstract\model.php(50): diogodg\neoorm\db->delete('1')
+#1 C:\wamp64\www\easytask\app\controllers\main\category.php(78): diogodg\neoorm\abstract\model->remove()
+#2 C:\wamp64\www\easytask\index.php(74): app\controllers\main\category->action(Array)
+#3 {main}
+2024-11-30T21:09:13+00:00 [ERROR] : app\controllers\main\category->action(Array(    [0] => 1)) Error: Tabela: category SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`easytask`.`task`, CONSTRAINT `task_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `category` (`id`)) Trace: #0 C:\wamp64\www\easytask\vendor\diogodg\neoorm\src\abstract\model.php(50): diogodg\neoorm\db->delete('1')
+#1 C:\wamp64\www\easytask\app\controllers\main\category.php(78): diogodg\neoorm\abstract\model->remove()
+#2 C:\wamp64\www\easytask\index.php(74): app\controllers\main\category->action(Array)
+#3 {main}
