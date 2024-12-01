@@ -6,7 +6,7 @@ use app\helpers\mensagem;
 use app\view\layout\footer;
 use app\view\layout\head;
 use app\view\layout\header;
-use core\controller;    
+use core\router;    
 use core\method;
 use core\parameter;
 use core\request;
@@ -27,7 +27,7 @@ $urlPermitidas = [
     "/mensagem"
 ];
 
-$controller = new Controller;
+$controller = new router;
 
 $user = session::get("user");
 

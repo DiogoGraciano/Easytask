@@ -40,7 +40,11 @@ final class task extends model {
             $mensagens[] = "Usuario não encontrado";
         }
 
-        if(!$this->id_categoria || !(new category)->get($this->id_usuario)->id){
+        if(!$this->id_categoria){
+            $this->id_categoria = null;
+        }
+
+        if($this->id_categoria && !(new category)->get($this->id_usuario)->id){
             $mensagens[] = "Categoria não encontrada";
         }
 

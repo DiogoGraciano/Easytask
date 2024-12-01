@@ -124,7 +124,7 @@ final class menu extends model {
         if(!$menu->addLimit(1)->selectColumns("id")){
             $menu->controller = "task";
             $menu->class_icone = "fa-solid fa-list-check";
-            $menu->tipo_usuario = json_encode([0,1,2]);
+            $menu->tipo_usuario = json_encode([1,2]);
             $menu->nome = "Tarefa";
             $menu->ordem = 1;
             $menu->target_blank = 0;
@@ -133,7 +133,7 @@ final class menu extends model {
             $menu = new self;
             $menu->controller = "category";
             $menu->class_icone = "fa-solid fa-layer-group";
-            $menu->tipo_usuario = json_encode([0,1,2]);
+            $menu->tipo_usuario = json_encode([1,2]);
             $menu->nome = "Categoria";
             $menu->ordem = 1;
             $menu->target_blank = 0;
@@ -142,8 +142,17 @@ final class menu extends model {
             $menu = new self;
             $menu->controller = "checkout";
             $menu->class_icone = "fa-solid fa-crown";
-            $menu->tipo_usuario = json_encode([0,1,2]);
+            $menu->tipo_usuario = json_encode([1]);
             $menu->nome = "Se Torne Pro";
+            $menu->ordem = 1;
+            $menu->target_blank = 0;
+            $menu->ativo = 1;
+            $menu->store();
+            $menu = new self;
+            $menu->controller = "checkout";
+            $menu->class_icone = "fa-solid fa-crown";
+            $menu->tipo_usuario = json_encode([2]);
+            $menu->nome = "Planos";
             $menu->ordem = 1;
             $menu->target_blank = 0;
             $menu->ativo = 1;

@@ -21,8 +21,8 @@ final class user extends model {
                 ->addColumn((new column("senha", "VARCHAR", 150))->setComment("Senha do usuário"))
                 ->addColumn((new column("email", "VARCHAR", 200))->isUnique()->setComment("Email do usuário"))
                 ->addColumn((new column("tipo_usuario","INT"))->isNotNull()->setComment("Tipo de usuário: 0 -> ADM, 1 -> Usuário, 2 -> Usuário Premium"))
-                ->addColumn((new column("criado","TIMESTAMP"))->isNotNull()->setDefaut("CURRENT_TIMESTAMP",true))
-                ->addColumn((new column("ativo","TINYINT"))->isNotNull()->setDefaut(0));
+                ->addColumn((new column("id_stripe","VARCHAR", 150))->setComment("ID do usuário stripe"))
+                ->addColumn((new column("criado","TIMESTAMP"))->isNotNull()->setDefaut("CURRENT_TIMESTAMP",true));
     }
 
     public function getByFilter(?int $id_empresa = null,?string $nome = null,?int $tipo_usuario = null,?string $email = null,?int $limit = null,?int $offset = null,?bool $asArray = true):array
@@ -102,17 +102,12 @@ final class user extends model {
             $mensagens[] = "Tipo de usuario invalido";
         }
 
-        if(!$this->ativo){
-            $this->ativo = 0;
-        }
-
-        if(!($this->ativo != 0 || $this->ativo != 1)){
-            $mensagens[] = "Valor de Ativo Invalido";
-        }
-
         $this->senha = $this->senha ? password_hash(trim($this->senha),PASSWORD_DEFAULT) : $usuario->senha;
 
         $this->criado = functions::dateTimeBd("now");
+
+        if($this->id_stripe)
+            $this->id_stripe = htmlspecialchars((trim($this->id_stripe)));
 
         if($mensagens){
             mensagem::setErro(...$mensagens);

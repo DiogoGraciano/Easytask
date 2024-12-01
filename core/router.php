@@ -3,7 +3,7 @@ namespace core;
 
 use app\controllers\main\error;
 
-class controller{
+class router{
    
     private string $uri;
 

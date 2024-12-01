@@ -4,8 +4,6 @@ namespace app\view\layout;
 
 use app\helpers\functions;
 use app\models\config;
-use app\models\cidade;
-use app\models\estado;
 use app\view\layout\abstract\layout;
 use core\url;
 

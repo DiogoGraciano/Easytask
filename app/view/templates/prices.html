@@ -1,0 +1,33 @@
+<section class="pricing py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- BEGIN BLOCK_PRICING -->
+      <div class="col-lg-4">
+        <div class="card mb-5 mb-lg-0" style="min-height: 300px;">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">{name}</h5>
+            <h6 class="card-price text-center">{price}</h6>
+            <hr>
+            <ul class="fa-ul">
+              <!-- BEGIN BLOCK_HAS -->
+              <li><span class="fa-li"><i class="fas fa-check"></i></span>{title}</li>
+              <!-- END BLOCK_HAS -->
+              <!-- BEGIN BLOCK_NOT_HAS -->
+              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>{title}</li>
+              <!-- END BLOCK_NOT_HAS -->
+            </ul>
+            <div class="d-grid">
+              <!-- BEGIN BLOCK_BUTTOM -->
+              <a href="{buttom_link}" class="w-100 btn btn-lg btn-primary">{buttom_label}</a>
+              <!-- END BLOCK_BUTTOM -->
+              <!-- BEGIN BLOCK_SELECTED -->
+              <span class="w-100 btn btn-lg btn-success">SELECIONADO</span>
+              <!-- END BLOCK_SELECTED -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END BLOCK_PRICING -->
+    </div>
+  </div>
+</section>

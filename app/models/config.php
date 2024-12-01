@@ -24,6 +24,7 @@ class config extends model {
                 ->addColumn((new column("keywords","VARCHAR",300))->setComment("Meta Palavras Chaves"))
                 ->addColumn((new column("nome","VARCHAR",150))->setComment("Nome empresa"))
                 ->addColumn((new column("contato_email","VARCHAR",150))->setComment("Contato Email"))
+                ->addColumn((new column("stripe_price_id","VARCHAR",150))->setComment("Id do produto/preço na stripe"))
                 ->addColumn((new column("smtp_servidor","VARCHAR",150))->setComment("SMTP Servidor"))
                 ->addColumn((new column("smtp_port","SMALLINT"))->setComment("SMTP Port"))
                 ->addColumn((new column("smtp_encryption","VARCHAR",3))->setComment("SMTP Encryption"))

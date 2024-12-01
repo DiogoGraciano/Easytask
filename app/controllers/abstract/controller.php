@@ -8,7 +8,7 @@ use app\models\menu;
 use app\view\layout\head;
 use core\url;
 use core\request;
-use core\controller as controlerUri;
+use core\router;
 
 abstract class controller
 {
@@ -36,7 +36,7 @@ abstract class controller
         $this->urlQuery = url::getUriQueryArray();
         $this->page = isset($this->urlQuery["page"])?intval($this->urlQuery["page"]):1;
     
-        $controller = (new controlerUri)->getControllerNotHome();
+        $controller = (new router)->getControllerNotHome();
 
         $user = login::getLogged();
 
@@ -49,10 +49,6 @@ abstract class controller
                 (new error)->index();
                 die;
             }
-        }
-
-        if($user && !$user->ativo){
-            mensagem::setMensagem("Verifique seu email para confirmação de cadastro");
         }
     }
 

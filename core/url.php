@@ -39,4 +39,10 @@ class url
         echo '<meta http-equiv="refresh" content="0;url='.self::getUrlBase().$caminho.'">';
         exit;
     }
+
+    public static function goToSite(string $caminho):void
+    {
+        echo '<meta http-equiv="refresh" content="0;url='.$caminho.'">';
+        exit;
+    }
 }    

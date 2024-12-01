@@ -69,6 +69,7 @@ final class task extends controller{
         $status = $elements->select("status","Status",$dado->status);
 
         $categoria = new category();
+        $elements->addOption("","Sem Categoria");
         $categorias = $categoria->getByfilter(id_usuario:$user->id);
         foreach ($categorias as $categoria){
             $elements->addOption($categoria["id"],$categoria["nome"]);
