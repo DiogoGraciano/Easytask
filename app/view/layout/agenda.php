@@ -2,7 +2,6 @@
 
 namespace app\view\layout;
 use app\view\layout\abstract\layout;
-use app\helpers\mensagem;
 use core\url;
 
 class agenda extends layout{
@@ -16,6 +15,8 @@ class agenda extends layout{
         $this->tpl->id_modal = $modal->getId();
         $this->tpl->url_update_form = $url_update_form;
         $this->tpl->modal = $modal->parse();
+
+        return $this;
     }
     
     public function set(array|string $eventos,string $days_on=",seg,ter,qua,qui,sex,",string $initial_time = "08:00",string $final_time = "19:00",int $slot_duration = 30):self

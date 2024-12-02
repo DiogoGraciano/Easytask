@@ -20,6 +20,8 @@ class category extends controller
         
         $nome = $this->getValue("nome");
 
+        $user = login::getLogged();
+
         $elements = new elements;
 
         $filter = new filter($this->url."category/index/");
@@ -39,7 +41,7 @@ class category extends controller
                 ->addMaintenceModal($modal,"/category/index")
                 ->setData($this->url . "category/updateForm/", 
                         $this->url . "category/action/", 
-                        $categoria->getByFilter($nome,limit:$this->getLimit(),offset:$this->getOffset()),
+                        $categoria->getByFilter($nome,$user->id,limit:$this->getLimit(),offset:$this->getOffset()),
                         "id")
                 ->addPagination(new pagination(
                     $categoria->getLastCount("getByFilter"),

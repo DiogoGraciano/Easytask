@@ -121,7 +121,7 @@ final class task extends model {
         $categoryHashMap = [];
         foreach ($categorys as $category)
         {
-            $categoryHashMap[$category->id] = $category->nome;
+            $categoryHashMap[$category["id"]] = $category["nome"];
         }
 
         $statusHashMap = ["P" => "Pendente","A" => "Em andamento","C" => "Concluída"];
