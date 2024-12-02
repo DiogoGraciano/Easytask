@@ -10,12 +10,10 @@ final class login{
     {
         $login = (new user)->get($usuario,"email");
 
-        if ($login->id && ($login->ativo || strtotime($login->criado) < strtotime('+1 days'))){
-            if (password_verify($senha, $login->senha)){
-                $login->senha = $senha;
-                session::set("user",(object)$login->getArrayData());
-                return true;
-            }
+        if ($login->id && password_verify($senha, $login->senha)){
+            $login->senha = $senha;
+            session::set("user",(object)$login->getArrayData());
+            return true;
         }
 
         mensagem::setErro("Usuário ou senha inválidos");

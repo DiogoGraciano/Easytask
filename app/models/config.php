@@ -24,7 +24,6 @@ class config extends model {
                 ->addColumn((new column("keywords","VARCHAR",300))->setComment("Meta Palavras Chaves"))
                 ->addColumn((new column("nome","VARCHAR",150))->setComment("Nome empresa"))
                 ->addColumn((new column("contato_email","VARCHAR",150))->setComment("Contato Email"))
-                ->addColumn((new column("stripe_price_id","VARCHAR",150))->setComment("Id do produto/preço na stripe"))
                 ->addColumn((new column("smtp_servidor","VARCHAR",150))->setComment("SMTP Servidor"))
                 ->addColumn((new column("smtp_port","SMALLINT"))->setComment("SMTP Port"))
                 ->addColumn((new column("smtp_encryption","VARCHAR",3))->setComment("SMTP Encryption"))
@@ -33,6 +32,8 @@ class config extends model {
                 ->addColumn((new column("recaptcha_site_key","VARCHAR",150))->setComment("Chave Site Recapcha"))
                 ->addColumn((new column("recaptcha_secret_key","VARCHAR",150))->setComment("Chave Secreta Recapcha"))
                 ->addColumn((new column("recaptcha_minimal_score","TINYINT"))->setComment("Score Minimo Recapcha"))
+                ->addColumn((new column("stripe_public_key","VARCHAR",250))->setComment("Chave Publica da Stripe"))
+                ->addColumn((new column("stripe_secret_key","VARCHAR",250))->setComment("Chave Secreta da Stripe"))
                 ->addColumn((new column("ativo","TINYINT"))->setDefaut(1)->setComment("Ativo"));
     }
 
@@ -73,6 +74,8 @@ class config extends model {
         $this->smtp_senha    = htmlspecialchars(trim($this->smtp_senha));
         $this->recaptcha_site_key = htmlspecialchars(trim($this->recaptcha_site_key));
         $this->recaptcha_secret_key = htmlspecialchars(trim($this->recaptcha_secret_key));
+        $this->stripe_public_key = htmlspecialchars(trim($this->stripe_public_key));
+        $this->stripe_secret_key = htmlspecialchars(trim($this->stripe_secret_key));
         
         if ($this->store()){
             mensagem::setSucesso("Empresa salva com sucesso");

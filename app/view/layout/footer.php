@@ -8,7 +8,6 @@ use core\url;
 
 class footer extends layout
 {
-
     public function __construct(string $logo = "assets\imagens\logo_grande.webp",int $tamanho_logo = 4)
     {
         $this->setTemplate("footer.html");
@@ -19,6 +18,7 @@ class footer extends layout
         }
         $this->tpl->caminho = url::getUrlBase();
         $this->tpl->ano = date("Y");
+        $this->tpl->wave = (new wave(4,"#0b5ed7",name:"footer",margin:3))->parse();
     }
 
     public function addLink(string $link,string $titulo,string $extra = ""):footer
@@ -73,13 +73,12 @@ class footer extends layout
     public function show():void
     {
         $this->setSectionPagina();
-        (new wave(4,"#0b5ed7",name:"footer",margin:3))->show();
         $this->tpl->show();
     }
 
     public function parse():string
     {
         $this->setSectionPagina();
-        return (new wave(4,"#0b5ed7",name:"footer",margin:3))->parse().$this->tpl->parse();
+        return $this->tpl->parse();
     }
 }

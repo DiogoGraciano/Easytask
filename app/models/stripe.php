@@ -13,8 +13,10 @@ class stripe
 
     public function __construct()
     {
-        \Stripe\Stripe::setApiKey("sk_test_51QQzeuKc6bHBeiPU0jDhqLllF7j9nxlaX9PkJrqBosSjonvYigAk6y10lnS0myKWqbn193zK5BEmlxBlHgoIJRq100g7RLoLAA");
-        $this->stripe = new \Stripe\StripeClient('sk_test_51QQzeuKc6bHBeiPU0jDhqLllF7j9nxlaX9PkJrqBosSjonvYigAk6y10lnS0myKWqbn193zK5BEmlxBlHgoIJRq100g7RLoLAA'); 
+        $config = (new config)->get(1);
+
+        \Stripe\Stripe::setApiKey($config->stripe_secret_key);
+        $this->stripe = new \Stripe\StripeClient($config->stripe_secret_key); 
     }
 
     public function addItem(string $name,float $value,?stripeInterval $interval = stripeInterval::MONTH,int $qtd = 1)

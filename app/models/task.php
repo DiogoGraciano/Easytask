@@ -20,6 +20,7 @@ final class task extends model {
         return (new table(self::table,comment:"Tabela de tasks"))
                 ->addColumn((new column("id","INT"))->isPrimary()->setComment("ID agendamento"))
                 ->addColumn((new column("id_usuario","INT"))->isForeingKey(user::table())->setComment("ID da tabela usuario"))
+                ->addColumn((new column("cor","VARCHAR",7))->setDefaut("#4267b2")->isNotNull()->setComment("Cor do agendamento"))
                 ->addColumn((new column("titulo","VARCHAR",150))->isNotNull()->setComment("titulo do agendamento"))
                 ->addColumn((new column("dt_ini","TIMESTAMP"))->isNotNull()->setComment("Data inicial de agendamento"))
                 ->addColumn((new column("dt_fim","TIMESTAMP"))->isNotNull()->setComment("Data final de agendamento"))
@@ -60,6 +61,10 @@ final class task extends model {
             $mensagens[] = "Data final invalida";
         }
 
+        if(!$this->cor = functions::validaCor($this->cor?:"#4267b2")){
+            $mensagens[] = "Cor invalida";
+        }
+
         if($this->status != "P" && $this->status != "A" && $this->status != "C"){
             $mensagens[] = "Status informado invalido";
         }
@@ -77,6 +82,82 @@ final class task extends model {
         }
             
         return null;
+    }
+
+    public function getByFilter(?string $dt_ini = null,?string $dt_fim = null,?int $id_usuario = null,?int $id_categoria = null,?string $status = null,?int $limit = null,?int $offset = null,?bool $asArray = true):array
+    {
+        if($dt_ini)
+            $this->addFilter("dt_ini",">=",functions::dateTimeBd($dt_ini));
+        if($dt_fim)
+            $this->addFilter("dt_fim","<=",functions::dateTimeBd($dt_fim));
+        if($id_categoria)
+            $this->addFilter("id_categoria","=",$id_categoria);
+        if($id_usuario)
+            $this->addFilter("id_usuario","=",$id_usuario);
+        if($status)
+            $this->addFilter("status","=",$status);
+
+        if($limit && $offset){
+            self::setLastCount($this);
+            $this->addLimit($limit);
+            $this->addOffset($offset);
+        }
+        elseif($limit){
+            self::setLastCount($this);
+            $this->addLimit($limit);
+        }
+
+        if($asArray){
+            $this->asArray();
+        }
+                      
+        return $this->selectAll();
+    }
+
+    public function prepareList($tasks){
+   
+        $categorys = (new category)->getByFilter($id_usuario = login::getLogged()->id);
+
+        $categoryHashMap = [];
+        foreach ($categorys as $category)
+        {
+            $categoryHashMap[$category->id] = $category->nome;
+        }
+
+        $statusHashMap = ["P" => "Pendente","A" => "Em andamento","C" => "Concluída"];
+
+        $tasksFinal = [];
+        $i = 0;
+        foreach ($tasks as $task){
+            $i++;
+            if(is_subclass_of($task,"diogodg\\neoorm\db")){
+                $task = $task->getArrayData();
+            }
+
+            if ($task["dt_ini"]){
+                $task["dt_ini"]= functions::dateTimeBr($task["dt_ini"]);
+            }
+
+            if ($task["dt_fim"]){
+                $task["dt_fim"] = functions::dateTimeBr($task["dt_fim"]);
+            }
+
+            if ($task["id_categoria"]){
+                $task["category"] = $categoryHashMap[$task["id_categoria"]];
+            }
+
+            if (!$task["id_categoria"]){
+                $task["category"] = "Sem Categoria";
+            }
+
+            if ($task["status"]){
+                $task["status"] = $statusHashMap[$task["status"]];
+            }
+
+            $tasksFinal[] = $task;
+        }
+
+        return $tasksFinal;
     }
 
     public function getEventsbyFilter(?string $dt_ini = null,?string $dt_fim = null,?int $id_usuario = null,?int $id_categoria = null,?string $status = null):array
@@ -103,6 +184,7 @@ final class task extends model {
                     'title' => $result->titulo,
                     'start' => $result->dt_ini,
                     'end' => $result->dt_fim,
+                    'color' => $result->cor
                 ];
             }
         }

@@ -27,12 +27,12 @@ class elements extends layout{
         return $this->parse();
     }
 
-    public function buttonModal(string $label,string $name,string $querySelectormodal,string $class="btn btn-primary",string $extra=""):string
+    public function buttonModal(string $label,string $name,string $querySelectorModal,string $class="btn btn-primary",string $extra=""):string
     {
         $this->setTemplate("elements.html");
 
         $this->tpl->name = $name;
-        $this->tpl->modal = $querySelectormodal;
+        $this->tpl->modal = $querySelectorModal;
         $this->tpl->class = $class;
         $this->tpl->extra = $extra;
         $this->tpl->label = $label;

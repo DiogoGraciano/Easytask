@@ -42,9 +42,9 @@ final class login extends controller{
 
         if ($login){
             $this->go("");
-        }else {
-            $this->go("login");
         }
+
+        $this->index();
     }
 
     public function user(array $parameters = [],?user $user = null):void
@@ -87,7 +87,6 @@ final class login extends controller{
         $usuario->senha        = $senha;
         $usuario->email        = $this->getValue('email');
         $usuario->tipo_usuario = 1;
-        $usuario->ativo        = 1;
 
         try {
             if ($usuario->set()){

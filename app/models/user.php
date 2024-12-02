@@ -102,7 +102,7 @@ final class user extends model {
             $mensagens[] = "Tipo de usuario invalido";
         }
 
-        $this->senha = $this->senha ? password_hash(trim($this->senha),PASSWORD_DEFAULT) : $usuario->senha;
+        $this->senha = $this->senha != $usuario->senha ? password_hash(trim($this->senha),PASSWORD_DEFAULT) : $usuario->senha;
 
         $this->criado = functions::dateTimeBd("now");
 

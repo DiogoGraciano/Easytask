@@ -131,6 +131,15 @@ final class menu extends model {
             $menu->ativo = 1;
             $menu->store();
             $menu = new self;
+            $menu->controller = "task/listagem";
+            $menu->class_icone = "fa-solid fa-list";
+            $menu->tipo_usuario = json_encode([2]);
+            $menu->nome = "Listagem de Tarefas";
+            $menu->ordem = 1;
+            $menu->target_blank = 0;
+            $menu->ativo = 1;
+            $menu->store();
+            $menu = new self;
             $menu->controller = "category";
             $menu->class_icone = "fa-solid fa-layer-group";
             $menu->tipo_usuario = json_encode([1,2]);

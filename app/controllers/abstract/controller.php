@@ -2,7 +2,6 @@
 namespace app\controllers\abstract;
 
 use app\controllers\main\error;
-use app\helpers\mensagem;
 use app\models\login;
 use app\models\menu;
 use app\view\layout\head;
@@ -41,10 +40,27 @@ abstract class controller
         $user = login::getLogged();
 
         if($controller && !get_called_class()::permitAccess){
-            
-            $menu = (new menu())->get($controller,"controller");
 
-            if($menu->id && $user && !in_array($user->tipo_usuario,json_decode($menu->tipo_usuario))){
+            $uri = urL::getUriPath();
+
+            $method = "";
+
+            if (substr_count($uri,'/') > 1){
+                $method = array_values(array_filter(explode('/',$uri)));
+                if (array_key_exists(1,$method))
+                    $method = "/".$method[1];
+            }
+
+            $menus = (new menu())->getByFilter($controller);
+
+            $exists = false;
+            foreach ($menus as $menu){
+                if($user && in_array($user->tipo_usuario,json_decode($menu["tipo_usuario"]))){
+                    $exists = true;
+                }
+            }
+
+            if(!$exists){
                 (new head("Error"))->show();
                 (new error)->index();
                 die;

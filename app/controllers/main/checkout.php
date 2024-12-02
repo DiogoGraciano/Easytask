@@ -26,6 +26,7 @@ class checkout extends controller
         $prices->addNotHasBlock("Filtro por datas");
         $prices->addNotHasBlock("Modificar cores tarefas");
         $prices->addNotHasBlock("Remover em massa tarefas",);
+        $prices->addNotHasBlock("Atualizar status de tarefas em massa");
         if($user->tipo_usuario == 2)
             $prices->addButtom($this->url."checkout/cancel","Desistir do Pro");
         $prices->setPrice("Gratuito","R$0.00\Mensais",$user->tipo_usuario == 1?true:false);
@@ -35,6 +36,7 @@ class checkout extends controller
         $prices->addHasBlock("Filtro por datas");
         $prices->addHasBlock("Modificar cores tarefas");
         $prices->addHasBlock("Remover em massa tarefas");
+        $prices->addHasBlock("Atualizar status de tarefas em massa");
         if($user->tipo_usuario == 1)
             $prices->addButtom($this->url."checkout/stripe","Se Tornar Pro");
         $prices->setPrice("Pro","R$20.00\Mensais",$user->tipo_usuario == 2?true:false);
@@ -43,7 +45,7 @@ class checkout extends controller
 
     public function stripe(){
         $stripe = new stripe;
-        $stripe->addItem("TaskEasy Pro",20);
+        $stripe->addItem("EasyTask Pro",20);
         $stripeSection = $stripe->createSection(login::getLogged()->email,$this->url."checkout/success",$this->url."checkout/cancel");
         session::set("stripe_on",true);
         url::goToSite($stripeSection->url);

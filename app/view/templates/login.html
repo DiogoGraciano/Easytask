@@ -4,7 +4,7 @@
             <img src="{caminho}assets\imagens\logo_grande.webp" alt="logo">
         </div>
         <div class="row w-100 mt-5">
-            <form method="POST" action="{caminho}{action_login}">
+            <form method="POST" hx-post="{caminho}{action_login}" hx-target="section.login" hx-swap="outerHtml">
                 <div class="col-md-12">
                     <input type="hidden" id="g-recaptcha-login-response" name="g-recaptcha-login-response" value="">
                     <label for="usuario">E-mail:</label>
